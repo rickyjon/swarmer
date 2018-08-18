@@ -37,6 +37,12 @@ class Component extends React.Component<IAddButtonProps, {}> {
     private onFileOpen = (event: React.ChangeEvent<HTMLInputElement>) => {
         const files = event.target.files;
 
+        if (files[0].type !== "application/x-bittorrent") {
+            // todo: make application/x-bittorent a const
+            console.error("Wrong filetype: " + files[0].type);
+            return;
+        }
+
         if (files.length === 0) {
             console.error("Failed to read file");
             return;
